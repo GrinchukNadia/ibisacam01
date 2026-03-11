@@ -3,30 +3,30 @@ import java.util.Scanner;
 
 public class MuenzeWerfenV2 {
     static void main(String[] args) {
-        int kopf = 0;
-        int zahl = 0;
-        int malWerfen;
-        String result;
-        Random random = new Random();
-
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int heads = 0;
+        int count = 0;
+        int tossCoinTimes;
+        String tossResult;
+
         System.out.println("Schreibe, wie viel Mal wir die Münze werfen:");
-        malWerfen = scanner.nextInt();
+        tossCoinTimes = scanner.nextInt();
 
-        for (int i = 0; i < malWerfen; i++) {
+        for (int i = 0; i < tossCoinTimes; i++) {
             if (random.nextBoolean()) {
-                result = "Kopf!";
-                kopf++;
+                tossResult = "Kopf!";
+                heads++;
             } else {
-                result = "Zahl!";
-                zahl++;
+                tossResult = "Zahl!";
+                count++;
             }
-            System.out.println("Werfe Münze… " + result);
+            System.out.println("Werfe Münze… " + tossResult);
         }
-        System.out.println("Summe Kopf: " + kopf);
-        System.out.println("Summe Zahl: " + zahl);
+        System.out.println("Summe Kopf: " + heads);
+        System.out.println("Summe Zahl: " + count);
 
-        if (kopf > zahl) {
+        if (heads > count) {
             System.out.println("Ich bekomme das Ticket.");
         } else {
             System.out.println("Stefan bekommt das Ticket.");

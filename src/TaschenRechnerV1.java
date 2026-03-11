@@ -1,15 +1,15 @@
 public class TaschenRechnerV1 {
     static void main(String[] args){
-        int a = 5;
-        int b = 3;
-        double division = (double) a / b;
+        int firstNumber = 5;
+        int secondNumber = 3;
+        double division = (double) firstNumber / secondNumber;
 
-        System.out.println("Erste Variable: " + a);
-        System.out.println("Zweite Variable: " + b);
-        System.out.println("Ergebnis der Addition: " + (a+b));
-        System.out.println("Ergebnis der Subtraktion: " + (a-b));
-        System.out.println("Ergebnis der Multiplikation: " + (a*b));
+        System.out.println("Erste Variable: " + firstNumber);
+        System.out.println("Zweite Variable: " + secondNumber);
+        System.out.println("Ergebnis der Addition: " + (firstNumber + secondNumber));
+        System.out.println("Ergebnis der Subtraktion: " + (firstNumber - secondNumber));
+        System.out.println("Ergebnis der Multiplikation: " + (firstNumber * secondNumber));
         System.out.println("Ergebnis der Division: " +  division);
-        System.out.println("Ergebnis der ModuloRechnung:" + (a%b));
+        System.out.println("Ergebnis der ModuloRechnung:" + (firstNumber % secondNumber));
     }
 }

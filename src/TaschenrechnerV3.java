@@ -16,32 +16,30 @@ public class TaschenrechnerV3 {
                 operator == '%'
             ) {
                 System.out.println("Gib die erste Zahl ein: ");
-                int a = scanner.nextInt();
+                int number1 = scanner.nextInt();
                 System.out.println("Gib die zweite Zahl ein: ");
-                int b = scanner.nextInt();
+                int number2 = scanner.nextInt();
 
                 switch (operator) {
                     case '+':
-                        System.out.println(a + " + " + b + " = " + (a + b));
+                        System.out.println(number1 + " + " + number2 + " = " + (number1 + number2));
                         break;
                     case '-':
-                        System.out.println(a + " - " + b + " = " + (a - b));
+                        System.out.println(number1 + " - " + number2 + " = " + (number1 - number2));
                         break;
                     case '*':
-                        System.out.println(a + " * " + b + " = " + (a * b));
+                        System.out.println(number1 + " * " + number2 + " = " + (number1 * number2));
                         break;
                     case '/':
-                        System.out.println(a + " / " + b + " = " + (double) a / b);
+                        System.out.println(number1 + " / " + number2 + " = " + (double) number1 / number2);
                         break;
                     case '%':
-                        System.out.println(a + " % " + b + " = " + (a % b));
+                        System.out.println(number1 + " % " + number2 + " = " + (number1 % number2));
                         break;
                     default:
                         System.out.println("Gib den Operator (+, -, *, /, %) ein: ");
                 }
             }
-
-
             if (operator == 'X') isCounting = false;
         }
     }
