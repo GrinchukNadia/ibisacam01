@@ -17,7 +17,7 @@ public class MuenzeWerfenV4 {
                 System.out.println("Wie oft soll die Münze geworfen werden (INSGESAMT ungerade, neue Zahl 1-10)?");
                 tossCoinTimes = scanner.nextInt();
             }
-            while ((tossCount + tossCoinTimes) % 2 == 0  && (tossCoinTimes >= 1 && tossCoinTimes <= 10));
+            while ((tossCount + tossCoinTimes) % 2 == 0 || !(tossCoinTimes >= 1 && tossCoinTimes <= 10));
 
             tossCount += tossCoinTimes;
 
