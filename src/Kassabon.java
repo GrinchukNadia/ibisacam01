@@ -3,12 +3,12 @@ public class Kassabon {
         int n1 = 2;
         double n2 = 1.50;
         double sumN = (n1*n2);
-        System.out.println(String.format("%-10s  %7d x %.2f \n %30.2f","Blumen", n1, n2, sumN));
+        System.out.println(String.format("%-10s %7d x %.2f \n %30.2f","Blumen", n1, n2, sumN));
         int o1 = 4;
         double o2 = 9.20;
         double sumO = (o1*o2);
         System.out.println(String.format("%-10s %7d x %.2f \n %30.2f", "Erde", o1, o2, sumO));
-        int p1 = 4;
+        int p1 = 3;
         double p2= 9.20;
         double sumP = (p1*p2);
         System.out.println(String.format("%-10s %7d x %.2f \n %30.2f","Palmen", p1, p2, sumP));
@@ -16,9 +16,12 @@ public class Kassabon {
         double r2= 9.90;
         double sumR = (r1*r2);
         System.out.println(String.format("%-10s %7d x %.2f \n %30.2f","Kaktus",r1, r2, sumR));
+
+        double generalSum = sumN + sumO + sumR + sumP;
+        double paid = 200;
         System.out.println(String.format("-------------------------------"));
-        System.out.println(String.format("Gesamt:"));
-        System.out.println(String.format("Bezahlt:"));
-        System.out.println(String.format("Zurück:"));
+        System.out.println(String.format("%s %23.2f", "Gesamt:", generalSum));
+        System.out.println(String.format("%s %22.2f", "Bezahlt:", paid));
+        System.out.println(String.format("%s %23.2f", "Zurück:", (paid - generalSum)));
     }
 }
