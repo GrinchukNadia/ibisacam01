@@ -13,8 +13,8 @@ public class KinoVerwaltungV1 {
         String ticketText = (ticketsAmount > 1) ? "Tickets" : "Ticket";
         ArrayList<Integer> chosenMovies = new ArrayList<Integer>();
         String[][] movieData = {
-                {"1.", "Batman", "20:15", "1", "10"},
-                {"2.", "Matrix", "22:00", "3", "87"},
+                {"1.", "Batman", "20:15", "1", "1"},
+                {"2.", "Matrix", "22:00", "3", "3"},
                 {"3.", "Matrix 2", "17:00", "2", "0"},
         };
         String[] headers = {"Filmnr", "Filmname", "Uhrzeit", "Saal", "Restplätze"};
@@ -26,7 +26,12 @@ public class KinoVerwaltungV1 {
             System.out.println(String.format("%-10s %-20s %-10s %-6s %s ", headers));
             System.out.println("------------------------------------------------------------");
             for (int i = 0; i < movieData.length; i++) {
-                System.out.println(String.format("%-10s %-20s %-10s %-6s %s", movieData[i]));
+                System.out.println(String.format("%-10s %-20s %-10s %-6s %s",
+                        movieData[i][0],
+                        movieData[i][1],
+                        movieData[i][2],
+                        movieData[i][3],
+                        (Integer.parseInt(movieData[i][4]) == 0 ? "ausgebucht" : "verfügbar")));
             }
             System.out.println("------------------------------------------------------------");
             do {
@@ -37,24 +42,29 @@ public class KinoVerwaltungV1 {
             } while (choice != 0 && ((choice < 1 ||
                     choice > movieData.length) ||
                     budget < 15 ||
-                    Objects.equals(movieData[choice - 1][4], "ausgebucht")));
+                    Objects.equals(movieData[choice - 1][4], "0")));
 
             if (choice != 0) {
-                int availableTickets = Integer.parseInt(movieData[choice - 1][3]);
+                int availableTickets = Integer.parseInt(movieData[choice - 1][4]);
                 int amountTickets = 0;
+                boolean isEnoughMoney = false;
                 do {
-                    System.out.println(String.format("Es sind noch %d %s um jeweils %.0f€ dafür verfügbar. Wie viele möchtest du kaufen?", availableTickets, ticketText, ticketPrice));
+                    System.out.println(String.format("Es sind noch %d %s um jeweils %.0f€ dafür verfügbar. Wie viele möchtest du kaufen?",
+                            availableTickets, ticketText, ticketPrice));
                     amountTickets = scanner.nextInt();
 
-                    for (int i = 0; i <= amountTickets; i++) {
-                        chosenMovies.add(choice - 1);
+                    isEnoughMoney = budget - (amountTickets * ticketPrice) >= 0;
+                    if (isEnoughMoney) {
+                        for (int i = 0; i <= amountTickets; i++) {
+                            chosenMovies.add(choice - 1);
+                        }
+                        double ticketsPrice = amountTickets * ticketPrice;
+                        budget -= ticketsPrice;
+                        System.out.println(String.format("Du kaufst %d Tickets um %.2f€ und hast jetzt noch %.2f€",
+                                amountTickets, ticketsPrice, budget));
+                        movieData[choice - 1][4] = String.valueOf(Integer.parseInt(movieData[choice - 1][4]) - amountTickets);
                     }
-                    double ticketsPrice = amountTickets * ticketPrice;
-                    budget -= ticketsPrice;
-                    System.out.println(String.format("Du kaufst %d Tickets um %.2f€ und hast jetzt noch %.2f€", amountTickets, ticketsPrice, budget));
-                    movieData[choice - 1][3] = String.valueOf(Integer.parseInt(movieData[choice - 1][3]) - amountTickets);
-                    if (Integer.parseInt(movieData[choice - 1][3]) == 0) movieData[choice - 1][4] = "ausgebucht";
-                } while (amountTickets > availableTickets || amountTickets < 0);
+                } while (amountTickets > availableTickets || amountTickets < 0 || !isEnoughMoney );
 
             }
 
