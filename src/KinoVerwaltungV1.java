@@ -10,8 +10,7 @@ public class KinoVerwaltungV1 {
         double ticketPrice = 15;
         int choice = -1;
         int ticketsAmount = 2;
-        String ticketText = (ticketsAmount > 1) ? "Tickets" : "Ticket";
-        ArrayList<Integer> chosenMovies = new ArrayList<Integer>();
+        ArrayList<Integer> chosenMovies = new ArrayList<>();
         String[][] movieData = {
                 {"1.", "Batman", "20:15", "1", "1"},
                 {"2.", "Matrix", "22:00", "3", "3"},
@@ -19,8 +18,11 @@ public class KinoVerwaltungV1 {
         };
         String[] headers = {"Filmnr", "Filmname", "Uhrzeit", "Saal", "Restplätze"};
 
-        System.out.println("Wie viel Geld hast du?");
-        budget = scanner.nextInt();
+        do {
+            System.out.println("Wie viel Geld hast du?");
+            budget = scanner.nextInt();
+        } while (budget <= 0);
+
 
         do {
             System.out.println(String.format("%-10s %-20s %-10s %-6s %s ", headers));
@@ -41,13 +43,15 @@ public class KinoVerwaltungV1 {
 
             } while (choice != 0 && ((choice < 1 ||
                     choice > movieData.length) ||
-                    budget < 15 ||
-                    Objects.equals(movieData[choice - 1][4], "0")));
+                    budget < ticketPrice ||
+                    movieData[choice - 1][4].equals("0")));
 
             if (choice != 0) {
                 int availableTickets = Integer.parseInt(movieData[choice - 1][4]);
                 int amountTickets = 0;
                 boolean isEnoughMoney = false;
+                String ticketText = (ticketsAmount > 1) ? "Tickets" : "Ticket";
+
                 do {
                     System.out.println(String.format("Es sind noch %d %s um jeweils %.0f€ dafür verfügbar. Wie viele möchtest du kaufen?",
                             availableTickets, ticketText, ticketPrice));
@@ -55,7 +59,7 @@ public class KinoVerwaltungV1 {
 
                     isEnoughMoney = budget - (amountTickets * ticketPrice) >= 0;
                     if (isEnoughMoney) {
-                        for (int i = 0; i <= amountTickets; i++) {
+                        for (int i = 0; i < amountTickets; i++) {
                             chosenMovies.add(choice - 1);
                         }
                         double ticketsPrice = amountTickets * ticketPrice;
@@ -64,10 +68,8 @@ public class KinoVerwaltungV1 {
                                 amountTickets, ticketsPrice, budget));
                         movieData[choice - 1][4] = String.valueOf(Integer.parseInt(movieData[choice - 1][4]) - amountTickets);
                     }
-                } while (amountTickets > availableTickets || amountTickets < 0 || !isEnoughMoney );
-
+                } while (amountTickets > availableTickets || amountTickets <= 0 || !isEnoughMoney );
             }
-
         } while ((!breakProgram));
     }
 }
