@@ -15,6 +15,7 @@ public class KinoVerwaltungV1 {
                 {"1.", "Batman", "20:15", "1", "1"},
                 {"2.", "Matrix", "22:00", "3", "3"},
                 {"3.", "Matrix 2", "17:00", "2", "0"},
+                {"3.", "Matrix 2", "17:00", "2", "0"},
         };
         String[] headers = {"Filmnr", "Filmname", "Uhrzeit", "Saal", "Restplätze"};
 
@@ -23,7 +24,7 @@ public class KinoVerwaltungV1 {
             budget = scanner.nextInt();
         } while (budget <= 0);
 
-
+//не работает количество купленных билетов, можно купить больш или меньше
         do {
             System.out.println(String.format("%-10s %-20s %-10s %-6s %s ", headers));
             System.out.println("------------------------------------------------------------");
@@ -33,7 +34,7 @@ public class KinoVerwaltungV1 {
                         movieData[i][1],
                         movieData[i][2],
                         movieData[i][3],
-                        (Integer.parseInt(movieData[i][4]) == 0 ? "ausgebucht" : "verfügbar")));
+                        Integer.parseInt(movieData[i][4]) == 0 ? "ausgebucht" : "verfügbar"));
             }
             System.out.println("------------------------------------------------------------");
             do {
@@ -70,6 +71,6 @@ public class KinoVerwaltungV1 {
                     }
                 } while (amountTickets > availableTickets || amountTickets <= 0 || !isEnoughMoney );
             }
-        } while ((!breakProgram));
+        } while (!breakProgram);
     }
 }
