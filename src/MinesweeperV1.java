@@ -10,8 +10,12 @@ public class MinesweeperV1 {
         int guessed = 0;
         int line = map.length;
         int column = ' ';
-        boolean cleaned;
+        int cleaned = 0;
         boolean lost = false;
+//        заменить массив на int
+//        обрабатывать отдельно выбор\
+//        можно сделть пустое поле -3 в 3 и так далее а бомбу обрабатывать как 4
+//        если из а вычесть аски код то получу индекс который мне нужен
 
 //      filling Array with random numbers
         for (int x = 0; x < map.length; x++) {
@@ -25,12 +29,12 @@ public class MinesweeperV1 {
         while (!lost) {
 //          drawing field in console
             for (int i = 0; i < map.length; i++) {
-                System.out.println("");
+                System.out.println();
                 if (i == 0) {
                     for (char head : headers) {
                         System.out.printf("   %c", head);
                     }
-                    System.out.println("");
+                    System.out.println();
                 }
                 for (int j = 0; j < map[i].length; j++) {
                     if (i == line && j == column) {
@@ -40,12 +44,14 @@ public class MinesweeperV1 {
                         } else if (j == 0 && !(Objects.equals(map[i][j], "0"))) {
                             System.out.printf("%d [%s] ", i, "-");
                             map[i][j] = "-";
+                            cleaned++;
                         } else if ((Objects.equals(map[i][j], "0"))) {
                             lost = true;
                             System.out.printf("[%s] ", "*");
                         } else {
                             System.out.printf("[-] ");
                             map[i][j] = "-";
+                            cleaned++;
                         }
                     } else if (j == 0) {
                         String field = Objects.equals(map[i][j], "-") ? "-" : " ";
@@ -57,7 +63,8 @@ public class MinesweeperV1 {
             }
 
             System.out.println("\n");
-            System.out.printf("Du hast 0/%d (0.0 %%) des nicht verminten Gebiets auf Minen gecheckt\n", myCount);
+            int notMined = 100 - myCount;
+            System.out.printf("Du hast %d/%d (%.1f %%) des nicht verminten Gebiets auf Minen gecheckt\n", cleaned, notMined, (double) cleaned*100/notMined);
             System.out.printf("Es bleiben noch %d Minen versteckt.\n", (myCount - guessed));
 
             String answer = "";
@@ -69,6 +76,7 @@ public class MinesweeperV1 {
                 for (int c = 0; c < headers.length; c++) {
                     if (columnChar == headers[c]) column = c;
                 }
+                System.out.printf("User input: %d/%d", column, line);
             }
         }
         System.out.println("Das... war eine Mine. Du hast leider verloren.");
