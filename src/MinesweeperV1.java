@@ -12,8 +12,6 @@ public class MinesweeperV1 {
         int column = ' ';
         boolean cleaned;
         boolean lost = false;
-        boolean isBomb;
-        int empty = 1;
 
 //      filling Array with random numbers
         for (int x = 0; x < map.length; x++) {
@@ -39,36 +37,39 @@ public class MinesweeperV1 {
                         if (j == 0 && (Objects.equals(map[i][j], "0"))) {
                             lost = true;
                             System.out.printf("%d [%s] ", i, "*");
-                        } else if(j == 0 && !(Objects.equals(map[i][j], "0"))){
+                        } else if (j == 0 && !(Objects.equals(map[i][j], "0"))) {
                             System.out.printf("%d [%s] ", i, "-");
-                        } else if((Objects.equals(map[i][j], "0"))) {
+                            map[i][j] = "-";
+                        } else if ((Objects.equals(map[i][j], "0"))) {
                             lost = true;
-                            System.out.printf("[-]");
-                        } else System.out.printf("[-]");
-
+                            System.out.printf("[%s] ", "*");
+                        } else {
+                            System.out.printf("[-] ");
+                            map[i][j] = "-";
+                        }
                     } else if (j == 0) {
-                        System.out.printf("%d [ ] ", i);
+                        String field = Objects.equals(map[i][j], "-") ? "-" : " ";
+                        System.out.printf("%d [%s] ", i, field);
+                    } else if (Objects.equals(map[i][j], "-")) {
+                        System.out.print("[-] ");
                     } else System.out.print("[ ] ");
-
-//                  else if (j == 0) {
-//                      System.out.print(String.format("%d [%s] ", i, map[i][j]));
-//                  } else System.out.print(String.format("[%s] ", map[i][j]));
-
                 }
             }
 
             System.out.println("\n");
             System.out.printf("Du hast 0/%d (0.0 %%) des nicht verminten Gebiets auf Minen gecheckt\n", myCount);
             System.out.printf("Es bleiben noch %d Minen versteckt.\n", (myCount - guessed));
-            System.out.println("Wo willst du nach Minen suchen?");
-            String answer = scanner.nextLine().toUpperCase();
 
-            char columnChar = answer.charAt(0);
-            line = Integer.parseInt(String.valueOf(answer.charAt(1)));
-            for (int c = 0; c < headers.length; c++) {
-                if (columnChar == headers[c]) column = c;
+            String answer = "";
+            if (!lost) {
+                System.out.println("Wo willst du nach Minen suchen?");
+                answer = scanner.nextLine().toUpperCase();
+                char columnChar = answer.charAt(0);
+                line = Integer.parseInt(String.valueOf(answer.charAt(1)));
+                for (int c = 0; c < headers.length; c++) {
+                    if (columnChar == headers[c]) column = c;
+                }
             }
-
         }
         System.out.println("Das... war eine Mine. Du hast leider verloren.");
     }
