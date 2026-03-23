@@ -15,7 +15,7 @@ public class StatistikV2 {
                     isSorted = false;
                 }
             }
-        } ;
+        }
         System.out.println(Arrays.toString(unsortedArray));
     }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,34 +17,17 @@ public class Millionenshow {
         double money = 100;
 
 //      random unique questions algorithm
-        int[] randomOrder = new int[questions.length];
-        boolean isUnique = false;
-        boolean uniqueZero = true;
-        for (int i = 0; i < questions.length; i++) {
+        ArrayList<Integer> randomOrder = new ArrayList<>();
+        while(randomOrder.size() < questions.length ) {
             int randomNumber = random.nextInt(questions.length);
-
-            for (int value : randomOrder) {
-                if (randomNumber == 0 && uniqueZero) {
-                    uniqueZero = false;
-                    isUnique = true;
-                    break;
-                }
-                if (value == randomNumber) {
-                    isUnique = false;
-                    break;
-                }
-                isUnique = true;
-            }
-            if (isUnique) randomOrder[i] = randomNumber;
-            else i--;
+            if(!randomOrder.contains(randomNumber)) randomOrder.add(randomNumber);
         }
-//      end random unique questions algorithm
 
         int answer;
-        boolean outRange = true;
+        boolean outRange;
         int correctAnswer;
         for (int i = 0; i < questions.length; i++) {
-            String[] question = questions[randomOrder[i]];
+            String[] question = questions[randomOrder.get(i)];
 
 //          Question
             System.out.println(question[0]);
@@ -52,25 +36,25 @@ public class Millionenshow {
 //          Answers
             do {
                 for (int x = 1; x < question.length - 1; x++) {
-                    System.out.println(String.format("%d. %s", x, question[x]));
+                    System.out.printf("%d. %s\n", x, question[x]);
                 }
                 correctAnswer = Integer.parseInt(question[question.length - 1]);
                 answer = scanner.nextInt();
-                outRange = answer < 1 || answer > correctAnswer;
+                outRange = answer < 1 || answer > (question.length - 2);
             } while (outRange);
 
             if (answer == correctAnswer) {
-                System.out.println(String.format("Deine Antwort: %d", answer));
+                System.out.printf("Deine Antwort: %d\n", answer);
                 System.out.println("Richtig");
                 System.out.println(" ");
                 money *= 2;
             } else {
-                System.out.println(String.format("Deine Antwort: %d", answer));
+                System.out.printf("Deine Antwort: %d\n", answer);
                 System.out.println("Falsch");
                 System.out.println(" ");
                 money /= 10;
             }
         }
-        System.out.println(String.format("Gewinn: %.0f", money));
+        System.out.printf("Gewinn: %.0f", money);
     }
 }

@@ -12,9 +12,8 @@ public class Histogramm {
             randomNumbersArray[i] = random.nextInt(10);
         }
 
-
         for (int j : randomNumbersArray) {
-            for (int x = 0; x <= statistic.length; x++) {
+            for (int x = 0; x < statistic.length; x++) {
                 if (j == x) statistic[x] += "*";
             }
         }

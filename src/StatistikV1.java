@@ -11,7 +11,7 @@ public class StatistikV1 {
 
         for (int i = 0; i < charsArray.length; i++) {
             char currentChar = charsArray[i];
-            if(currentChar >= 65 && currentChar <= 90) capitalLetters++;
+            if(currentChar >= 'A' && currentChar <= 'Z') capitalLetters++;
             else if(currentChar >= 'a' && currentChar <= 'z') lowercaseLetters++;
             else if(currentChar >= '0' && currentChar <= '9') numbers++;
             else specialCharacters++;

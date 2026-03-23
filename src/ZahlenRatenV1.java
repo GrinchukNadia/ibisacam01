@@ -21,7 +21,6 @@ public class ZahlenRatenV1 {
                 do {
                     int guess;
                     do {
-                        //System.out.println("dev random number" + randomNumber);
                         System.out.println("Guess the number from 0 to 100");
                         System.out.printf("You have %d attempts \n", attempts);
                         guess = scanner.nextInt();
@@ -50,7 +49,6 @@ public class ZahlenRatenV1 {
                 do {
                     int guess;
                     do {
-                        //System.out.println("dev random number" + randomNumber);
                         System.out.println("Guess the number from 0 to 100");
                         System.out.printf("You have %d attempts \n", attempts);
                         guess = scanner.nextInt();
@@ -58,20 +56,20 @@ public class ZahlenRatenV1 {
 
                     int difference = guess - randomNumber;
                     String moreOrLess = difference > 0 ? "above" : "below";
-
+                    difference = difference < 0 ? -(difference) : difference;
                     if (guess == randomNumber) {
                         System.out.println("You won!!!");
                         isRunning = false;
-                    } else if (difference >= 1 && difference <= 3 || difference >= -3 && difference <= -1) {
+                    } else if (difference <= 3) {
                         System.out.printf("Almost there, 1-3 %s the target.\n", moreOrLess);
                         --attempts;
-                    } else if (difference >= 4 && difference <= 10 || difference >= -10 && difference <= -4) {
+                    } else if (difference <= 10) {
                         System.out.printf("Relatively close, 4-10 %s the target.\n", moreOrLess);
                         --attempts;
-                    } else if (difference >= 11 && difference <= 20 || difference >= -20 && difference <= -11) {
+                    } else if (difference <= 20) {
                         System.out.printf("Not that far off, 11-20 %s the target.\n", moreOrLess);
                         --attempts;
-                    } else if (difference >= 20 || difference <= -20) {
+                    } else {
                         System.out.printf("Far off, more than 20 %s the target.\n", moreOrLess);
                         --attempts;
                     }
@@ -93,9 +91,6 @@ public class ZahlenRatenV1 {
                         // I guess
                         int guess;
                         do {
-                            //System.out.println("dev random number" + randomNumber);
-                            //System.out.println("upper bound " + upperBound);
-                            //System.out.println("lower bound " + lowerBound);
                             System.out.println("Guess the number from 0 to 100");
                             guess = scanner.nextInt();
                         } while (guess < 0 || guess > 100);
@@ -110,25 +105,6 @@ public class ZahlenRatenV1 {
                         } else {
                             System.out.println("The number is bigger");
                             if (lowerBound < guess) lowerBound = guess;
-                        }
-
-                        if (isRunning) {
-                            //computer guesses
-                            int computerGuess;
-                            System.out.println("Computer is guessing...");
-                            computerGuess = (upperBound - lowerBound) / 2 + lowerBound;
-                            System.out.printf("Coumputer guess is: %d\n", computerGuess);
-                            choices.add(computerGuess);
-                            if (computerGuess == randomNumber) {
-                                System.out.println("Computer won!!!");
-                                isRunning = false;
-                            } else if (computerGuess > randomNumber) {
-                                System.out.println("The number is smaller.");
-                                if (upperBound > computerGuess) upperBound = computerGuess;
-                            } else {
-                                System.out.println("The number is bigger");
-                                if (lowerBound < computerGuess) lowerBound = computerGuess;
-                            }
                         }
                     } else {
                         //computer guesses
@@ -147,34 +123,11 @@ public class ZahlenRatenV1 {
                             System.out.println("The number is bigger");
                             if (lowerBound < computerGuess) lowerBound = computerGuess;
                         }
-
-                        if (isRunning) {
-                            // I guess
-                            int guess;
-                            do {
-                                //System.out.println("dev random number" + randomNumber);
-                                //System.out.println("upper bound " + upperBound);
-                                //System.out.println("lower bound " + lowerBound);
-                                System.out.println("Guess the number from 0 to 100");
-                                guess = scanner.nextInt();
-                            } while (guess < 0 || guess > 100);
-                            choices.add(guess);
-                            if (guess == randomNumber) {
-                                System.out.println("You won!!!");
-                                isRunning = false;
-                            } else if (guess > randomNumber) {
-                                System.out.println("The number is smaller.");
-                                if (upperBound > guess) upperBound = guess;
-                            } else {
-                                System.out.println("The number is bigger");
-                                if (lowerBound < guess) lowerBound = guess;
-                            }
-                        }
                     }
+                    computerFirst = !computerFirst;
                 } while (isRunning);
                 System.out.println(choices);
             }
-
         } while (level != 0);
     }
 }
