@@ -38,6 +38,8 @@ public class Mastermind {
         for (int g : guessFalse) {
             for (int s : secretFalse) {
                 if (g == s) white++;
+                secretFalse.remove(Integer.valueOf(s));
+                break;
             }
         }
         return new int[]{black, white};

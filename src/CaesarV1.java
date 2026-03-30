@@ -45,3 +45,8 @@ public class CaesarV1 {
         return encrypt(text, -key);
     }
 }
+/*
+ минус 26 вместо модуля
+ if > z - 26
+ if < a  +26
+ */

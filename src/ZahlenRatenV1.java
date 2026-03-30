@@ -6,7 +6,7 @@ public class ZahlenRatenV1 {
     static void main() {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        int level = 1;
+        int level ;
 
         do {
             do {
