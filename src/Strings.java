@@ -70,6 +70,7 @@ public class Strings {
         System.out.printf("%s\n%s\n",p2, isPangram(p2));
     }
 
+    //while менять местами последнее и первую букву тоже перевернет в обратном направлении
     public static String reverse(String s) {
         StringBuilder converse = new StringBuilder();
         String[] words = s.split(" ");
@@ -88,8 +89,9 @@ public class Strings {
     }
 
     public static boolean isPangram(String s) {
+        s = s.toLowerCase();
         for (int i = 'a'; i <= (int) 'z'; i++) {
-            if(!s.toLowerCase().contains(String.valueOf((char) i))) return false;
+            if(!s.contains(String.valueOf((char) i))) return false;
         }
         return true;
     }
