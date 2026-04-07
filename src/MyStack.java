@@ -23,12 +23,11 @@ public class MyStack {
     }
 
     public double pop() {
-        myList.remove(myList.size() - 1);
-        return myList.size() - 1;
+        return myList.remove(myList.size() - 1);
     }
 
     public double peek() {
-        return myList.size() - 1;
+        return myList.get(size() - 1);
     }
 
     public int size() {
